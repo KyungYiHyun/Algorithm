@@ -16,7 +16,6 @@ class Main {
         a1 = Integer.parseInt(st.nextToken());
         b1 = Integer.parseInt(st.nextToken());
         c1 = Integer.parseInt(st.nextToken());
-//        visited = new boolean[1001][1001][1001];
         visited = new boolean[1501][1501];
         System.out.println(solve());
 
@@ -99,18 +98,7 @@ class Main {
             this.c = c;
         }
 
-        @Override
-        public boolean equals(Object object) {
-            if (this == object) return true;
-            if (object == null || getClass() != object.getClass()) return false;
-            Busket busket = (Busket) object;
-            return a == busket.a && b == busket.b && c == busket.c;
-        }
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(a, b, c);
-        }
     }
 
 
