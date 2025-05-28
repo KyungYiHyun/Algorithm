@@ -29,10 +29,8 @@ public class Main {
             }
         }
         int ans = 0;
-//        System.out.println(Arrays.deepToString(board));
 
 
-//        System.out.println(board[r - 1][c - 1]);
         while (board[r - 1][c - 1] != k) {
             ans++;
             int rowSize = 0;
@@ -51,35 +49,30 @@ public class Main {
 
                 colSize = Math.max(colCnt, colSize);
                 rowSize = Math.max(rowCnt, rowSize);
-//                System.out.println("rowSize = " + rowSize);
-//                System.out.println("colSize = " + colSize);
+
             }
             if (ans > 100) {
                 ans = -1;
                 break;
             }
-//            System.out.println("rowSize = " + rowSize);
-//            System.out.println("colSize = " + colSize);
+
             if (rowSize >= colSize) {
-                rowSort();
-//                System.out.println(1);
+                rowSort(rowSize, colSize);
             } else {
-                colSort();
-//                System.out.println(0);
+                colSort(rowSize, colSize);
             }
 
-//            System.out.println(Arrays.deepToString(board));
+
         }
         System.out.println(ans);
-//        System.out.println(Arrays.deepToString(board));
+
 
     }
 
-    private static void rowSort() {
-        for (int i = 0; i < 100; i++) {
-            HashMap<Integer, Integer> map = new HashMap<>();
-
-            for (int j = 0; j < 100; j++) {
+    private static void rowSort(int rowSize, int colSize) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < rowSize; i++) {
+            for (int j = 0; j < colSize; j++) {
                 if (board[i][j] == 0) {
                     continue;
                 }
@@ -91,25 +84,26 @@ public class Main {
                             map.get(o1)).thenComparing(Comparator.comparingInt((o2) -> (int) o2))).limit(50)
                     .collect(Collectors.toList());
             int colIdx = 0;
-//            System.out.println("sorted = " + sorted);
+
             for (Integer integer : sorted) {
                 board[i][colIdx] = integer;
                 board[i][colIdx + 1] = map.get(integer);
                 colIdx += 2;
             }
-            for (int k = colIdx; k < 100; k++) {
+            for (int k = colIdx; k < colSize; k++) {
                 board[i][k] = 0;
             }
+            map.clear();
 
         }
 
-//        System.out.println(Arrays.deepToString(board));
+
     }
 
-    private static void colSort() {
-        for (int i = 0; i < 100; i++) {
-            HashMap<Integer, Integer> map = new HashMap<>();
-            for (int j = 0; j < 100; j++) {
+    private static void colSort(int rowSize, int colSize) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < colSize; i++) {
+            for (int j = 0; j < rowSize; j++) {
                 if (board[j][i] == 0) {
                     continue;
                 }
@@ -120,20 +114,21 @@ public class Main {
             List<Integer> sorted = map.keySet().stream().sorted(Comparator.comparing((o1) ->
                             map.get(o1)).thenComparing(Comparator.comparingInt((o2) -> (int) o2))).limit(50)
                     .collect(Collectors.toList());
-//            System.out.println(sorted);
+
             int rowIdx = 0;
-//            System.out.println("sorted = " + sorted);;
+
             for (Integer integer : sorted) {
                 board[rowIdx][i] = integer;
                 board[rowIdx + 1][i] = map.get(integer);
                 rowIdx += 2;
             }
-            for (int k = rowIdx; k < 100; k++) {
+            for (int k = rowIdx; k < rowSize; k++) {
                 board[k][i] = 0;
             }
+            map.clear();
 
         }
-//        System.out.println(Arrays.deepToString(board));
+
 
     }
 
