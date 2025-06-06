@@ -1,20 +1,22 @@
 import java.util.*;
 
 public class Solution {
-    public ArrayDeque solution(int []arr) {
-        ArrayDeque<Integer> stk = new ArrayDeque<>();
-        for (int n : arr){
-            if (stk.isEmpty()){
-                stk.addLast(n);
+    public Queue<Integer> solution(int []arr) {
+        int[] answer = {};
+        ArrayDeque<Integer> queue = new ArrayDeque<>();    
+        for (int i = 0; i < arr.length; i++){
+            if (queue.isEmpty()){
+                queue.add(arr[i]);
+                continue;
             }
-            if (!stk.isEmpty() && stk.peekLast() != n){
-                stk.addLast(n);
+            
+            if (queue.peekLast() == arr[i]){
+                continue;
             }
+            queue.add(arr[i]);
+  
         }
-      
-        
 
-
-        return stk;
+        return queue;
     }
 }
