@@ -3,57 +3,46 @@ import java.util.Arrays;
 
 class Solution {
     private static boolean visited[];
-    private static int l;
-
-    private static boolean dfs(int depth, ArrayList<Integer>[] list){
-
-        if (depth == l){
-            return true;
-        }
-
-        ArrayList<Integer> cur = list[depth];
-
-        for (Integer i : cur) {
-            if (!visited[i]){
-                visited[i] = true;
-                dfs(i,list);
-            }
-        }
-        return true;
-    }
-
-
+    private static int[][] computer;
 
     public int solution(int n, int[][] computers) {
         int answer = 0;
-        l = n;
         visited = new boolean[n];
-        ArrayList<Integer>[] adgList = new ArrayList[n];
-        for (int i = 0; i < n; i++) {
-            adgList[i] = new ArrayList<>();
-        }
-
-        for (int i = 0; i < computers.length; i++) {
-            for (int j = 0; j < computers[i].length; j++) {
-                if (i == j) {
-                    continue;
-                }
-                if (computers[i][j] == 1) {
-                    adgList[i].add(j);
-                }
-
-            }
-
-        }
-
+        computer = computers;
         for (int i = 0; i < n; i++){
-            if (!visited[i] && dfs(i,adgList)){
-                answer++;
+            if (!visited[i]){
+                dfs(i);
+                answer++;    
             }
-        }
-
-
+        }    
 
         return answer;
     }
-}
+    
+    private static void dfs(int depth){
+        
+        visited[depth] = true;
+        if (depth >= computer.length){
+            return;
+        }
+        
+        int[] nodes = computer[depth];
+        
+        
+       for (int i = 0; i < nodes.length; i++){
+           if (!visited[i] && nodes[i] == 1){
+               dfs(i);
+           }
+           
+       }
+            
+        }
+                               
+                               
+                               
+                               }
+        
+        
+    
+    
+    
