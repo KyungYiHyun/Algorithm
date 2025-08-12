@@ -34,16 +34,17 @@ public class Main {
             }
 
         }
-        System.out.print("<");
+        StringBuilder sb = new StringBuilder();
+        sb.append("<");
         for (int i = 0; i < answer.size(); i++) {
             if (i == answer.size() - 1) {
-                System.out.print(answer.get(i) + ">");
+                sb.append(answer.get(i) + ">");
                 break;
             }
-            System.out.print(answer.get(i) + ", ");
+            sb.append(answer.get(i) + ", ");
         }
 
-
+        System.out.println(sb);
     }
 
 
